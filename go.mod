@@ -25,6 +25,7 @@ require (
 	github.com/kr/pretty v0.3.1
 	github.com/miekg/dns v1.1.50
 	github.com/onsi/ginkgo/v2 v2.9.5
+	github.com/ovh/go-ovh v1.1.0
 	github.com/pavlo-v-chernykh/keystore-go/v4 v4.4.1
 	github.com/pkg/errors v0.9.1
 	github.com/prometheus/client_golang v1.15.1

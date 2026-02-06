@@ -284,7 +284,7 @@ func translateAnnotations(crt *cmapi.Certificate, ingLikeAnnotations map[string]
 		decoder := json.NewDecoder(strings.NewReader(secretTemplateJson))
 		decoder.DisallowUnknownFields()
 
-		var secretTemplate = new(cmapi.CertificateSecretTemplate)
+		secretTemplate := new(cmapi.CertificateSecretTemplate)
 		if err := decoder.Decode(secretTemplate); err != nil {
 			return fmt.Errorf("%w %q: error parsing secret template JSON: %v", errInvalidIngressAnnotation, cmapi.IngressSecretTemplate, err)
 		}

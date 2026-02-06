@@ -55,6 +55,7 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderCloudDNS":                    schema_pkg_apis_acme_v1_ACMEIssuerDNS01ProviderCloudDNS(ref),
 		"github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderCloudflare":                  schema_pkg_apis_acme_v1_ACMEIssuerDNS01ProviderCloudflare(ref),
 		"github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderDigitalOcean":                schema_pkg_apis_acme_v1_ACMEIssuerDNS01ProviderDigitalOcean(ref),
+		"github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderOVH":                         schema_pkg_apis_acme_v1_ACMEIssuerDNS01ProviderOVH(ref),
 		"github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderRFC2136":                     schema_pkg_apis_acme_v1_ACMEIssuerDNS01ProviderRFC2136(ref),
 		"github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderRoute53":                     schema_pkg_apis_acme_v1_ACMEIssuerDNS01ProviderRoute53(ref),
 		"github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderWebhook":                     schema_pkg_apis_acme_v1_ACMEIssuerDNS01ProviderWebhook(ref),
@@ -716,6 +717,12 @@ func schema_pkg_apis_acme_v1_ACMEChallengeSolverDNS01(ref common.ReferenceCallba
 							Ref:         ref("github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderRFC2136"),
 						},
 					},
+					"ovh": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Use the OVH DNS API to manage DNS01 challenge records.",
+							Ref:         ref("github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderOVH"),
+						},
+					},
 					"webhook": {
 						SchemaProps: spec.SchemaProps{
 							Description: "Configure an external webhook based DNS01 challenge solver to manage DNS01 challenge records.",
@@ -726,7 +733,7 @@ func schema_pkg_apis_acme_v1_ACMEChallengeSolverDNS01(ref common.ReferenceCallba
 			},
 		},
 		Dependencies: []string{
-			"github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderAcmeDNS", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderAkamai", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderAzureDNS", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderCloudDNS", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderCloudflare", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderDigitalOcean", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderRFC2136", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderRoute53", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderWebhook"},
+			"github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderAcmeDNS", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderAkamai", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderAzureDNS", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderCloudDNS", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderCloudflare", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderDigitalOcean", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderOVH", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderRFC2136", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderRoute53", "github.com/cert-manager/cert-manager/pkg/apis/acme/v1.ACMEIssuerDNS01ProviderWebhook"},
 	}
 }
 
@@ -1631,6 +1638,52 @@ func schema_pkg_apis_acme_v1_ACMEIssuerDNS01ProviderDigitalOcean(ref common.Refe
 					},
 				},
 				Required: []string{"tokenSecretRef"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector"},
+	}
+}
+
+func schema_pkg_apis_acme_v1_ACMEIssuerDNS01ProviderOVH(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "ACMEIssuerDNS01ProviderOVH is a structure containing the credentials configuration for The OVH API. see: https://support.us.ovhcloud.com/hc/en-us/articles/360018130839-First-Steps-with-the-OVHcloud-API",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"endpoint": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name of the OVH endpoint to use. This is typically set to 'ovh-eu'.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"applicationKey": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The OVH API Application key.",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"applicationSecretSecretRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name and key of the secret containing the Application Secret.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector"),
+						},
+					},
+					"consumerKeySecretRef": {
+						SchemaProps: spec.SchemaProps{
+							Description: "The name and key of the secret containing the Consumer key.",
+							Default:     map[string]interface{}{},
+							Ref:         ref("github.com/cert-manager/cert-manager/pkg/apis/meta/v1.SecretKeySelector"),
+						},
+					},
+				},
+				Required: []string{"endpoint", "applicationKey", "applicationSecretSecretRef", "consumerKeySecretRef"},
 			},
 		},
 		Dependencies: []string{

@@ -112,6 +112,9 @@ var schemaYAML = typed.YAMLObject(`types:
     - name: digitalocean
       type:
         namedType: com.github.cert-manager.cert-manager.pkg.apis.acme.v1.ACMEIssuerDNS01ProviderDigitalOcean
+    - name: ovh
+      type:
+        namedType: com.github.cert-manager.cert-manager.pkg.apis.acme.v1.ACMEIssuerDNS01ProviderOVH
     - name: rfc2136
       type:
         namedType: com.github.cert-manager.cert-manager.pkg.apis.acme.v1.ACMEIssuerDNS01ProviderRFC2136
@@ -447,6 +450,25 @@ var schemaYAML = typed.YAMLObject(`types:
       type:
         namedType: com.github.cert-manager.cert-manager.pkg.apis.meta.v1.SecretKeySelector
       default: {}
+- name: com.github.cert-manager.cert-manager.pkg.apis.acme.v1.ACMEIssuerDNS01ProviderOVH
+  map:
+    fields:
+    - name: applicationKey
+      type:
+        scalar: string
+      default: ""
+    - name: applicationSecretSecretRef
+      type:
+        namedType: com.github.cert-manager.cert-manager.pkg.apis.meta.v1.SecretKeySelector
+      default: {}
+    - name: consumerKeySecretRef
+      type:
+        namedType: com.github.cert-manager.cert-manager.pkg.apis.meta.v1.SecretKeySelector
+      default: {}
+    - name: endpoint
+      type:
+        scalar: string
+      default: ""
 - name: com.github.cert-manager.cert-manager.pkg.apis.acme.v1.ACMEIssuerDNS01ProviderRFC2136
   map:
     fields:

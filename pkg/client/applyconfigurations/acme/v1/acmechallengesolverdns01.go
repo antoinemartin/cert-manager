@@ -50,6 +50,8 @@ type ACMEChallengeSolverDNS01ApplyConfiguration struct {
 	// Use RFC2136 ("Dynamic Updates in the Domain Name System") (https://datatracker.ietf.org/doc/rfc2136/)
 	// to manage DNS01 challenge records.
 	RFC2136 *ACMEIssuerDNS01ProviderRFC2136ApplyConfiguration `json:"rfc2136,omitempty"`
+	// Use the OVH DNS API to manage DNS01 challenge records.
+	OVH *ACMEIssuerDNS01ProviderOVHApplyConfiguration `json:"ovh,omitempty"`
 	// Configure an external webhook based DNS01 challenge solver to manage
 	// DNS01 challenge records.
 	Webhook *ACMEIssuerDNS01ProviderWebhookApplyConfiguration `json:"webhook,omitempty"`
@@ -130,6 +132,14 @@ func (b *ACMEChallengeSolverDNS01ApplyConfiguration) WithAcmeDNS(value *ACMEIssu
 // If called multiple times, the RFC2136 field is set to the value of the last call.
 func (b *ACMEChallengeSolverDNS01ApplyConfiguration) WithRFC2136(value *ACMEIssuerDNS01ProviderRFC2136ApplyConfiguration) *ACMEChallengeSolverDNS01ApplyConfiguration {
 	b.RFC2136 = value
+	return b
+}
+
+// WithOVH sets the OVH field in the declarative configuration to the given value
+// and returns the receiver, so that objects can be built by chaining "With" function invocations.
+// If called multiple times, the OVH field is set to the value of the last call.
+func (b *ACMEChallengeSolverDNS01ApplyConfiguration) WithOVH(value *ACMEIssuerDNS01ProviderOVHApplyConfiguration) *ACMEChallengeSolverDNS01ApplyConfiguration {
+	b.OVH = value
 	return b
 }
 

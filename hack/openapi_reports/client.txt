@@ -15,6 +15,8 @@ API rule violation: names_match,github.com/cert-manager/cert-manager/pkg/apis/ac
 API rule violation: names_match,github.com/cert-manager/cert-manager/pkg/apis/acme/v1,ACMEIssuerDNS01ProviderCloudflare,APIKey
 API rule violation: names_match,github.com/cert-manager/cert-manager/pkg/apis/acme/v1,ACMEIssuerDNS01ProviderCloudflare,APIToken
 API rule violation: names_match,github.com/cert-manager/cert-manager/pkg/apis/acme/v1,ACMEIssuerDNS01ProviderDigitalOcean,Token
+API rule violation: names_match,github.com/cert-manager/cert-manager/pkg/apis/acme/v1,ACMEIssuerDNS01ProviderOVH,ApplicationSecret
+API rule violation: names_match,github.com/cert-manager/cert-manager/pkg/apis/acme/v1,ACMEIssuerDNS01ProviderOVH,ConsumerKey
 API rule violation: names_match,github.com/cert-manager/cert-manager/pkg/apis/acme/v1,ACMEIssuerDNS01ProviderRFC2136,TSIGSecret
 API rule violation: names_match,github.com/cert-manager/cert-manager/pkg/apis/acme/v1,ACMEIssuerDNS01ProviderRoute53,SecretAccessKey
 API rule violation: names_match,github.com/cert-manager/cert-manager/pkg/apis/acme/v1,ACMEIssuerDNS01ProviderRoute53,SecretAccessKeyID

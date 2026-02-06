@@ -78,6 +78,7 @@ github.com/cert-manager/cert-manager,Apache-2.0
 github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/azuredns,MIT
 github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/clouddns,MIT
 github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/cloudflare,MIT
+github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/ovh,MIT
 github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/route53,MIT
 github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/util,MIT
 github.com/cert-manager/cert-manager/third_party/forked/acme,BSD-3-Clause
@@ -147,6 +148,7 @@ github.com/modern-go/concurrent,Apache-2.0
 github.com/modern-go/reflect2,Apache-2.0
 github.com/munnerz/goautoneg,BSD-3-Clause
 github.com/nrdcg/goacmedns,MIT
+github.com/ovh/go-ovh/ovh,BSD-3-Clause
 github.com/pavlo-v-chernykh/keystore-go/v4,MIT
 github.com/pierrec/lz4,BSD-3-Clause
 github.com/pkg/browser,BSD-2-Clause

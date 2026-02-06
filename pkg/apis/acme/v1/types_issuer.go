@@ -436,6 +436,10 @@ type ACMEChallengeSolverDNS01 struct {
 	// +optional
 	RFC2136 *ACMEIssuerDNS01ProviderRFC2136 `json:"rfc2136,omitempty"`
 
+	// Use the OVH DNS API to manage DNS01 challenge records.
+	// +optional
+	OVH *ACMEIssuerDNS01ProviderOVH `json:"ovh,omitempty"`
+
 	// Configure an external webhook based DNS01 challenge solver to manage
 	// DNS01 challenge records.
 	// +optional
@@ -837,6 +841,24 @@ const (
 	// RFC2136UpdateProtocolUDP utilizes UDP to update queries.
 	RFC2136UpdateProtocolUDP RFC2136UpdateProtocol = "UDP"
 )
+
+// ACMEIssuerDNS01ProviderOVH is a structure containing the
+// credentials configuration for The OVH API.
+// see: https://support.us.ovhcloud.com/hc/en-us/articles/360018130839-First-Steps-with-the-OVHcloud-API
+type ACMEIssuerDNS01ProviderOVH struct {
+	// The name of the OVH endpoint to use.
+	// This is typically set to 'ovh-eu'.
+	Endpoint string `json:"endpoint"`
+
+	// The OVH API Application key.
+	ApplicationKey string `json:"applicationKey"`
+
+	// The name and key of the secret containing the Application Secret.
+	ApplicationSecret cmmeta.SecretKeySelector `json:"applicationSecretSecretRef"`
+
+	// The name and key of the secret containing the Consumer key.
+	ConsumerKey cmmeta.SecretKeySelector `json:"consumerKeySecretRef"`
+}
 
 // ACMEIssuerDNS01ProviderWebhook specifies configuration for a webhook DNS01
 // provider, including where to POST ChallengePayload resources.

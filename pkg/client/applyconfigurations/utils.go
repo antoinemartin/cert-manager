@@ -80,6 +80,8 @@ func ForKind(kind schema.GroupVersionKind) interface{} {
 		return &acmev1.ACMEIssuerDNS01ProviderCloudflareApplyConfiguration{}
 	case v1.SchemeGroupVersion.WithKind("ACMEIssuerDNS01ProviderDigitalOcean"):
 		return &acmev1.ACMEIssuerDNS01ProviderDigitalOceanApplyConfiguration{}
+	case v1.SchemeGroupVersion.WithKind("ACMEIssuerDNS01ProviderOVH"):
+		return &acmev1.ACMEIssuerDNS01ProviderOVHApplyConfiguration{}
 	case v1.SchemeGroupVersion.WithKind("ACMEIssuerDNS01ProviderRFC2136"):
 		return &acmev1.ACMEIssuerDNS01ProviderRFC2136ApplyConfiguration{}
 	case v1.SchemeGroupVersion.WithKind("ACMEIssuerDNS01ProviderRoute53"):

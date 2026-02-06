@@ -28,6 +28,7 @@ import (
 	"github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/clouddns"
 	"github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/cloudflare"
 	"github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/digitalocean"
+	"github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/ovh"
 	"github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/route53"
 	"github.com/cert-manager/cert-manager/pkg/issuer/acme/dns/util"
 )
@@ -143,6 +144,10 @@ func newFakeDNSProviders() *fakeDNSProviders {
 		},
 		digitalOcean: func(token string, dns01Nameservers []string, userAgent string) (*digitalocean.DNSProvider, error) {
 			f.call("digitalocean", token, util.RecursiveNameservers)
+			return nil, nil
+		},
+		OVH: func(ctx context.Context, endpoint, applicationKey, applicationSecret, consumerKey string, dns01Nameservers []string) (*ovh.DNSProvider, error) {
+			f.call("ovh", endpoint, applicationKey, applicationSecret, consumerKey, dns01Nameservers)
 			return nil, nil
 		},
 	}

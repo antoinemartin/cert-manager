@@ -30,6 +30,7 @@ require (
 	github.com/hashicorp/vault/sdk v0.23.0
 	github.com/miekg/dns v1.1.72
 	github.com/nrdcg/goacmedns v0.2.0
+	github.com/ovh/go-ovh v1.9.0
 	github.com/pavlo-v-chernykh/keystore-go/v4 v4.5.0
 	github.com/prometheus/client_golang v1.23.2
 	github.com/spf13/cobra v1.10.2
